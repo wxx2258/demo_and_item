@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>指定变形中心点</title>
+     <style type="text/css">
+        /*基本设置*/
+
+body{margin:0;padding:0;font-size:12px;font-family:Arial,"宋体";backgorund:#fff;}/*文档清零,字体,字号,背景设置.*/
+
+div,ul,li,p,form,h1,h2,h3,h4,h5,input,dl,dt,dd,fieldset,table,tr,td{margin:0;padding:0;}/*边界元素清零*/
+
+ul,li,ol{list-style:none;}/*去除列表符号*/
+
+img{border:none;}/*去除图片按钮边框*/
+
+a{text-decoration:none;}/*去除超链接下划线*/
+img,input,textarea{vertical-align:middle;}
+        div {
+            position:absolute;
+            width:90px;
+            height:90px;
+            background-color:#e4105e;
+            border:2px solid #000000;
+            margin:30px;
+        }
+         div.a {
+         left:30px;
+         top:30px;
+        }
+         div.b {
+         left:30px;
+         top:150px;
+        }
+          div.c {
+         left:30px;
+         top:270px;
+        }
+ </style>
+</head>
+<body>
+ <div class="a">为变换之前</div>
+<div class="a" style=" background:#b6ff00;
+         -moz-transform-origin:left top;-moz-transform:rotate(-25deg);
+         -webkit-transform-origin:left top;-webkit-transform:rotate(-25deg);
+         -o-transform-origin:left top;-webkit-transform:rotate(-25deg);">左上角为变形中心</div>
+
+<div class="b">为变换之前</div>
+<div class="b" style="background:#266c9b;
+         -moz-transform-origin:right bottom;-moz-transform:rotate(75deg);
+         -webkit-transform-origin:right bottom;-webkit-transform:rotate(75deg);
+         -o-transform-origin:right bottom;-webkit-transform:rotate(75deg);">右下角为变形中心</div>
+
+<div class="c">为变换之前</div>
+<div class="c" style="background:#ff6a00;
+-moz-transform-origin:right center;-moz-transform:rotate(-90deg);    
+-webkit-transform-origin:right center;-webkit-transform:rotate(-90deg);  
+-o-transform-origin:right center;-o-transform:rotate(-90deg);      
+">右边界中间为变形中心点</div>
+
+</body>
+</html>
