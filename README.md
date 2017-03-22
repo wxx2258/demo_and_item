@@ -28,7 +28,7 @@ demo and item that I have done;
 ## teacherANDpupil h5页面
 * 记录：
   	* 初次开发周期：2016-09-09 ~ 09-13
-
+	* 演示地址：https://rawgit.com/wxx2258/demo_and_item/master/teacherANDpupil/dist/index.html
 * 过程
 	1. 总结适配方案
 	2. 进行切图
