@@ -11,7 +11,7 @@ let server = app.listen(3000, function () {
 });
 
 app.get('/', function (req, res) {
-  const {pagenum, count = 10} = req.query;
+  const {pagenum = 0, count = 20} = req.query;
   getDatas({pagenum, count}).then((hotNews)=> {
     res.send(hotNews);
   }).catch(err=> {

@@ -2,8 +2,9 @@
 const superagent = require('superagent');
 const cheerio = require('cheerio');
 // const charset = require('superagent-charset');
-const pageSize = 25;
-const cookie = 'bid=dZfc6iLAwoo; __utmc=30149280; douban-fav-remind=1; __utmz=30149280.1590044740.2.2.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); push_doumail_num=0; __utmv=30149280.1131; ct=y; push_noty_num=0; _pk_ref.100001.8cb4=%5B%22%22%2C%22%22%2C1590325023%2C%22https%3A%2F%2Fwww.google.com.hk%2F%22%5D; _pk_ses.100001.8cb4=*; __utma=30149280.663478481.1590041878.1590322565.1590325023.8; ap_v=0,6.0; __utmt=1; dbcl2="11315967:K37XjdJFsSA"; ck=xIb3; _pk_id.100001.8cb4=78ac3c589a41fc10.1590041877.8.1590328220.1590322869.; __utmb=30149280.127.5.1590328220625';
+let pageSize = 25;
+
+const cookie = 'bid=dZfc6iLAwoo; douban-fav-remind=1; __utmv=30149280.1131; ct=y; dbcl2="11315967:K37XjdJFsSA"; push_noty_num=0; push_doumail_num=0; douban-profile-remind=1; __utmz=30149280.1590645271.21.5.utmcsr=localhost:3000|utmccn=(referral)|utmcmd=referral|utmcct=/; ck=xIb3; __utmc=30149280; _pk_ref.100001.8cb4=%5B%22%22%2C%22%22%2C1590845629%2C%22http%3A%2F%2Flocalhost%3A3000%2F%3Fpagenum%3D80%26count%3D20%22%5D; _pk_ses.100001.8cb4=*; __utma=30149280.663478481.1590041878.1590838532.1590845629.26; ap_v=0,6.0; __utmt=1; _pk_id.100001.8cb4=78ac3c589a41fc10.1590041877.26.1590847836.1590838594.; __utmb=30149280.49.5.1590847836068';
 // charset(superagent); //设置字符
 let mockHeader = {
   Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -35,10 +36,31 @@ let getHotNews = (res) => {
 
   // 找到目标数据所在的页面元素，获取数据
   $('.olt tr .title a').each((idx, ele) => {
+  // $('.olt tr .title').each((idx, ele) => {
     // cherrio中$('selector').each()用来遍历所有匹配到的DOM元素
     // 参数idx是当前遍历的元素的索引，ele就是当前便利的DOM元素
     // console.log('$(ele).attr: ', $(ele).attr('title').indexOf('深大'));
-    if ($(ele).attr('title').indexOf('阳光粤海') > -1) {
+    if ($(ele).attr('title').indexOf('海滨小区') > -1  
+        || $(ele).attr('title').indexOf('阳光粤海') > -1  
+        // || $(ele).attr('title').indexOf('两室') > -1  
+        // || $(ele).attr('title').indexOf('厚德品园') > -1  
+        // || $(ele).attr('title').indexOf('学林雅院') > -1  
+        // || $(ele).attr('title').indexOf('锦隆花园') > -1  
+        // || $(ele).attr('title').indexOf('海文花园') > -1  
+        // || $(ele).attr('title').indexOf('宏观苑') > -1 
+        // || $(ele).attr('title').indexOf('南山书城') > -1
+        // || $(ele).attr('title').indexOf('南油') > -1
+        // || $(ele).attr('title').indexOf('南油西') > -1
+        // || $(ele).attr('title').indexOf('荔林') > -1
+        // || $(ele).attr('title').indexOf('9号线') > -1
+        // || $(ele).attr('title').indexOf('深大南') > -1
+        // || $(ele).attr('title').indexOf('粤海门') > -1
+        // || $(ele).attr('title').indexOf('红树湾') > -1
+        // || $(ele).attr('title').indexOf('阳光科创') > -1
+        // || $(ele).attr('title').indexOf('桃园') > -1
+        // || $(ele).attr('title').indexOf('大新') > -1
+      ) {
+    // if($(ele).attr('title').indexOf('前海枫叶大厦') > -1 ){
 
       let news = {
         title: $(ele).attr('title'), // 获取新闻标题
@@ -97,9 +119,16 @@ async function getDatas(params = {
   pagenum: 1,
   count: 10
 }) {
+  pageSize = 50;
   const {pagenum, count} = params;
   console.log('pagenum, count: ', pagenum, count);
-  let url = 'https://www.douban.com/group/nanshanzufang/discussion?start=';
+  // const groupId = '498004';  // 深圳南山租房团
+  // const groupId = '598241'; // 深圳南山租房
+
+  // const groupId = '637638'; // 圳租房-南山租房★深圳南山租房
+  const groupId = 'nanshanzufang';
+  let url = `https://www.douban.com/group/${groupId}/discussion?start=`;
+  // let url = `https://www.douban.com/group/?start=`;
   let start = pagenum * pageSize;
   let result = [];
   for (let index = 0; index < count; index++) {

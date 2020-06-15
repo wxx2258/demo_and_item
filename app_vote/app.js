@@ -7,13 +7,11 @@ const user = leancloud.AV.User.current();
 var getUserInfo = ()=>{
     return new Promise(function(resolve,reject){
         leancloud.AV.User.loginWithWeapp().then(user => {
-          // console.log(user)
           wx.getUserInfo({
             success: function(userInfo){
               // 更新当前用户的信息
               user.set(userInfo).save().then(user => {
                 // 成功，此时可在控制台中看到更新后的用户信息
-                // console.log(user.id)
                 resolve( user.id )
               }).catch(console.error);
             },
