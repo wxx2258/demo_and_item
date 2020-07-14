@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>svg</title>
+</head>
+
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <!-- <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="orange" /> -->
+  </svg>
+</body>
+
+</html>
+<script src="https://d3js.org/d3-hierarchy.v1.min.js"></script>
+<script>
+const dataSource = 'https://s5.ssl.qhres.com/static/b0695e2dd30daa64.json';
+let root;
+(async function () {
+  const data = await (await fetch(dataSource)).json();
+
+  const regions = d3.hierarchy(data)
+    .sum(d => 1)
+    .sort((a, b) => b.value - a.value);
+
+  const pack = d3.pack()
+    .size([1600, 1600])
+    .padding(3);
+
+  root = pack(regions);
+  console.log('root: ', root);
+  
+  // 绘制
+  const svgroot = document.querySelector('svg');
+
+  function draw(parent, node, {
+    fillStyle = 'rgba(0, 0, 0, 0.2)',
+    textColor = 'white'
+  } = {}) {
+    const {
+      x,
+      y,
+      r
+    } = node;
+
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', x);
+    circle.setAttribute('cy', y);
+    circle.setAttribute('r', r);
+    circle.setAttribute('fill', fillStyle);
+    parent.appendChild(circle);
+    // ...
+  }
+
+  // draw(svgroot, {
+  //   x: 20,
+  //   y: 20,
+  //   r: 20
+  // });
+  draw(svgroot, root)
+}());
+
+</script>

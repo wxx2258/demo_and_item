@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      width: 250px;
+      height: 250px;
+    }
+  </style>
+</head>
+<body>
+  <canvas width="500" height="500"></canvas>
+</body>
+</html>
+
+<script>
+  const canvas = document.querySelector('canvas');
+
+  const context = canvas.getContext('2d');
+
+  context.fillStyle="red";
+  context.strokeStyle = 'blue'
+  context.beginPath()
+  context.moveTo(5,5)
+  context.lineTo(5, 50)
+  context.lineTo(25, 30)
+  context.fill();
+  // 椭圆和五角星没画，以及canvas的交互如何处理
+
+  // context.beginPath()
+  // context.moveTo(60,60);
+  // context.arcTo(60, 60, 120, 120, 30)
+  // context.arcTo(60, 60, 120, 120, 40)
+  // // context.arcTo( 120, 120,60, 60, 2*Math.PI)
+  // context.closePath();
+  // context.stroke();
+</script>
