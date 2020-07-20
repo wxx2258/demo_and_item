@@ -89,17 +89,17 @@ function drawBranch(context, v0, length, thickness, dir, bias) {
     drawBranch(context, v1, length * 0.9, thickness * 0.8, right, bias * 0.9);
   }
 
-  // if(thickness < 5 && Math.random() < 0.3) {
-  //   context.save();
-  //   context.strokeStyle = '#c72c35';
-  //   const th = Math.random() * 6 + 3;
-  //   context.lineWidth = th;
-  //   context.beginPath();
-  //   context.moveTo(...v1);
-  //   context.lineTo(v1.x, v1.y - 2);
-  //   context.stroke();
-  //   context.restore();
-  // }
+  if(thickness < 5 && Math.random() < 0.3) {
+    context.save();
+    context.strokeStyle = '#c72c35';
+    const th = Math.random() * 6 + 3;
+    context.lineWidth = th;
+    context.beginPath();
+    context.moveTo(...v1);
+    context.lineTo(v1.x, v1.y - 2);
+    context.stroke();
+    context.restore();
+  }
 }
 const v0 = new Vector2D(0, -256);
 drawBranch(ctx, v0, 50, 10, 1, 3);
