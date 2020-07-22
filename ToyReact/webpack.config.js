@@ -3,10 +3,14 @@ module.exports = {
     main: './main.js',
   },
   mode: 'development',
+  optimization: {
+    minimize: false,
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -14,15 +18,14 @@ module.exports = {
             plugins: [
               [
                 '@babel/plugin-transform-react-jsx',
-                { pragma: 'ToyReact.createElement' },
+                {
+                  pragma: 'ToyReact.createElement',
+                },
               ],
             ],
           },
         },
       },
     ],
-  },
-  optimization: {
-    minimize: false,
   },
 };
