@@ -1,8 +1,10 @@
+let childrenSynbol = Symbol('children');
 class ElementWrapper {
   constructor(type) {
     // this.root = document.createElement(type);
     this.type = type;
     this.props = Object.create(null);
+    this[childrenSynbol] = [];
     this.children = [];
   }
   setAttribute(name, value) {
@@ -16,8 +18,12 @@ class ElementWrapper {
     // this.root.setAttribute(name, value);
     this.props[name] = value;
   }
+  // get children() {
+  //   return this[childrenSynbol].map((child) => child.vdom);
+  // }
   appendChild(vchild) {
-    this.children.push(vchild);
+    this[childrenSynbol].push(vchild);
+    this.children.push(vchild.vdom);
     // let range = document.createRange();
     // if (this.root.children.length) {
     //   range.setStartAfter(this.root.lastChild);
@@ -28,8 +34,22 @@ class ElementWrapper {
     // }
     // vchild.mountTo(range);
   }
+  get vdom() {
+    // return {
+    //   type: this.type,
+    //   props: this.props,
+    //   children: this.children.map((child) => child.vdom),
+    // };
+    return this;
+  }
   mountTo(range) {
     this.range = range;
+    let placeholder = document.createComment('placeholder');
+    let endRange = document.createRange();
+    endRange.setStart(range.endContainer, range.endOffset);
+    endRange.setEnd(range.endContainer, range.endOffset);
+    endRange.insertNode(placeholder);
+
     range.deleteContents();
     let element = document.createElement(this.type);
 
@@ -71,6 +91,9 @@ class TextWrapper {
     range.deleteContents();
     range.insertNode(this.root);
   }
+  get vdom() {
+    return this;
+  }
 }
 
 export class Component {
@@ -102,13 +125,30 @@ export class Component {
 
     // this.range.deleteContents();
 
-    let vdom = this.render();
-    if (this.vdom) {
+    let vdom = this.vdom;
+    // console.log('vdom: ', vdom);
+    if (this.oldVdom) {
       let isSameNode = (node1, node2) => {
         if (node1.type !== node2.type) {
           return false;
         }
         for (const name in node1.props) {
+          // if (
+          //   typeof node1.props[name] === 'function' &&
+          //   typeof node2.props[name] === 'function' &&
+          //   node1.props[name].toString() === node2.props[name].toString()
+          // ) {
+          //   console.log('node1.props[name].toString()');
+          //   continue;
+          // }
+          if (
+            typeof node1.props[name] === 'object' &&
+            typeof node2.props[name] === 'object' &&
+            JSON.stringify(node1.props[name]) ===
+              JSON.stringify(node2.props[name])
+          ) {
+            continue;
+          }
           if (node1.props[name] !== node2.props[name]) {
             return false;
           }
@@ -141,28 +181,32 @@ export class Component {
         console.log(indent + 'newTree: ', newTree);
         console.log(indent + 'oldTree: ', oldTree);
         if (isSameTree(newTree, oldTree)) {
-          console.log('all same');
+          console.log(indent + 'all same');
           return;
         }
 
         if (!isSameNode(newTree, oldTree)) {
-          console.log('all difference');
+          console.log(indent + 'all difference');
           newTree.mountTo(oldTree.range);
         } else {
           for (let i = 0; i < newTree.children.length; i++) {
-            replace(newTree.children[i], oldTree.children[i], '  ' + indent);
+            replace(newTree.children[i], oldTree.children[i], '     ' + indent);
           }
         }
       };
 
-      replace(vdom, this.vdom, '');
+      replace(vdom, this.oldVdom, '');
 
       // console.log('new dom: ', vdom);
       // console.log('old dom: ', this.vdom);
     } else {
       vdom.mountTo(this.range);
     }
-    this.vdom = vdom;
+    this.oldVdom = vdom;
+  }
+
+  get vdom() {
+    return this.render().vdom;
   }
 
   appendChild(vchild) {
