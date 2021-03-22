@@ -1,0 +1,60 @@
+{
+  "name": "electron-efficiency-tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/main/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:main": "ELECTRON_IS_DEV=1 electron .",
+    "start:renderer": "cd app/renderer/main-page && npm start",
+    "build": "cd app/renderer/main-page && npm run build",
+    "pack": "NPM_CONFIG_ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/ electron-builder build --mac",
+    "pack:mac": "npm run build && NPM_CONFIG_ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/ electron-builder build --mac",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^12.0.1",
+    "electron-builder": "^22.10.5"
+  },
+  "build": {
+    "appId": "com.electron.electron-efficiency-tools",
+    "productName": "私房效率工具",
+    "directories": {
+      "buildResources": "resource",
+      "output": "release"
+    },
+    "files": "app",
+    "extraFiles": [
+      "app/renderer/**/src"
+    ],
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "resources/icon.icns"
+    },
+    "dmg": {
+      "background": "resources/background.png",
+      "window": {
+        "width": 540,
+        "height": 380
+      },
+      "contents": [
+        {
+          "x": 410,
+          "y": 180,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 180,
+          "type": "file"
+        }
+      ],
+      "iconSize": 128
+    }
+  }
+}
