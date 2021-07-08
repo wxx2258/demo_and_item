@@ -4,7 +4,7 @@ const cheerio = require('cheerio');
 // const charset = require('superagent-charset');
 let pageSize = 25;
 
-const cookie = 'bid=dZfc6iLAwoo; douban-fav-remind=1; __utmv=30149280.1131; ct=y; dbcl2="11315967:K37XjdJFsSA"; push_noty_num=0; push_doumail_num=0; douban-profile-remind=1; __utmz=30149280.1590645271.21.5.utmcsr=localhost:3000|utmccn=(referral)|utmcmd=referral|utmcct=/; ck=xIb3; __utmc=30149280; _pk_ref.100001.8cb4=%5B%22%22%2C%22%22%2C1590845629%2C%22http%3A%2F%2Flocalhost%3A3000%2F%3Fpagenum%3D80%26count%3D20%22%5D; _pk_ses.100001.8cb4=*; __utma=30149280.663478481.1590041878.1590838532.1590845629.26; ap_v=0,6.0; __utmt=1; _pk_id.100001.8cb4=78ac3c589a41fc10.1590041877.26.1590847836.1590838594.; __utmb=30149280.49.5.1590847836068';
+const cookie = 'douban-fav-remind=1; __utmv=30149280.1131; douban-profile-remind=1; _ga=GA1.2.663478481.1590041878; ll="118282"; _vwo_uuid_v2=D5A6B88A177DB4B079765C33399D8E1F8|61165e24ec470481d44601ba9cf9be7e; gr_user_id=0b02dc77-361d-4b24-acda-7ae93ae87c5c; bid=CJIYHWZ3pBQ; viewed="30231515_3354490_26860156"; __utmc=30149280; __utmz=30149280.1625104279.129.33.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); _pk_ref.100001.8cb4=%5B%22%22%2C%22%22%2C1625214446%2C%22https%3A%2F%2Fwww.google.com.hk%2F%22%5D; _pk_ses.100001.8cb4=*; ap_v=0,6.0; __utma=30149280.663478481.1590041878.1625125497.1625214446.131; dbcl2="11315967:sPnfHlZ8Kqc"; ck=0mgI; push_noty_num=0; push_doumail_num=0; __utmt=1; _pk_id.100001.8cb4=78ac3c589a41fc10.1590041877.120.1625215303.1625125496.; __utmb=30149280.115.5.1625215302723';
 // charset(superagent); //设置字符
 let mockHeader = {
   Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -125,8 +125,8 @@ async function getDatas(params = {
   // const groupId = '498004';  // 深圳南山租房团
   // const groupId = '598241'; // 深圳南山租房
 
-  // const groupId = '637638'; // 圳租房-南山租房★深圳南山租房
-  const groupId = 'nanshanzufang';
+  const groupId = '637638'; // 圳租房-南山租房★深圳南山租房
+  // const groupId = 'nanshanzufang';
   let url = `https://www.douban.com/group/${groupId}/discussion?start=`;
   // let url = `https://www.douban.com/group/?start=`;
   let start = pagenum * pageSize;
