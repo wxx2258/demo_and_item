@@ -22,6 +22,7 @@
 		5FF2C26327585AC200C7E3E8 /* GTNormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2C25C27585AC200C7E3E8 /* GTNormalTableViewCell.m */; };
 		5FF2C26427585AC200C7E3E8 /* GTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2C25F27585AC200C7E3E8 /* GTDetailViewController.m */; };
 		5FF2C26527585AC200C7E3E8 /* GTDeleteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2C26027585AC200C7E3E8 /* GTDeleteCellView.m */; };
+		5FFE7ABD277EB40200F59BB1 /* icon.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE7ABC277EB40200F59BB1 /* icon.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +45,6 @@
 		5FE8AE2027473717007B488E /* GTRecommendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTRecommendViewController.m; sourceTree = "<group>"; };
 		5FF2C2462758594F00C7E3E8 /* GTListLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTListLoader.h; sourceTree = "<group>"; };
 		5FF2C2472758594F00C7E3E8 /* GTListLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTListLoader.m; sourceTree = "<group>"; };
-		5FF2C249275859CF00C7E3E8 /* icon.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = icon.bundle; sourceTree = "<group>"; };
 		5FF2C25A27585AC200C7E3E8 /* GTDeleteCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTDeleteCellView.h; sourceTree = "<group>"; };
 		5FF2C25B27585AC200C7E3E8 /* GTNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTNewsViewController.m; sourceTree = "<group>"; };
 		5FF2C25C27585AC200C7E3E8 /* GTNormalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTNormalTableViewCell.m; sourceTree = "<group>"; };
@@ -53,6 +53,7 @@
 		5FF2C25F27585AC200C7E3E8 /* GTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDetailViewController.m; sourceTree = "<group>"; };
 		5FF2C26027585AC200C7E3E8 /* GTDeleteCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTDeleteCellView.m; sourceTree = "<group>"; };
 		5FF2C26127585AC200C7E3E8 /* GTNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTNewsViewController.h; sourceTree = "<group>"; };
+		5FFE7ABC277EB40200F59BB1 /* icon.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = icon.bundle; sourceTree = "<group>"; };
 		AB0CCB9678A26207F62AC7C3 /* Pods-singleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-singleApp.debug.xcconfig"; path = "Target Support Files/Pods-singleApp/Pods-singleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		CA0C3402E327186EFFC30DAB /* Pods-singleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-singleApp.release.xcconfig"; path = "Target Support Files/Pods-singleApp/Pods-singleApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,8 +91,8 @@
 		5F8992282734D53500351B27 /* singleApp */ = {
 			isa = PBXGroup;
 			children = (
+				5FFE7ABC277EB40200F59BB1 /* icon.bundle */,
 				5FF2C24A27585A3700C7E3E8 /* NewsController */,
-				5FF2C249275859CF00C7E3E8 /* icon.bundle */,
 				5FF2C243275858F500C7E3E8 /* loader */,
 				5F8992292734D53500351B27 /* AppDelegate.h */,
 				5F89922A2734D53500351B27 /* AppDelegate.m */,
@@ -242,6 +243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FFE7ABD277EB40200F59BB1 /* icon.bundle in Resources */,
 				5F8992392734D53600351B27 /* LaunchScreen.storyboard in Resources */,
 				5F8992362734D53600351B27 /* Assets.xcassets in Resources */,
 				5F8992342734D53500351B27 /* Main.storyboard in Resources */,

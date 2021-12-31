@@ -32,6 +32,7 @@
 //    UIViewController *controller1 = [[UIViewController alloc] init];
 //    controller1.view.backgroundColor = [UIColor redColor];
     newsViewController.tabBarItem.title = @"新闻";
+
     newsViewController.tabBarItem.image = [UIImage imageNamed:@"icon.bundle/page@2x.png"];
     newsViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"icon.bundle/page_selected@2x.png"];
 
