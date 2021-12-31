@@ -1,0 +1,3 @@
+target 'singleApp' do 
+	pod 'AFNetworking'
+end

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
+  <style>
+    #editor {
+      border: 1px solid #ccc;
+      height: calc(100vh - 60px);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="editor"></div>
+  <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+  <!-- 初始化 quill 编辑器 -->
+  <script>
+    // 这里的 options 是通过 injectedJavaScriptBeforeContentLoaded 属性注入的
+    const quill = new Quill('#editor', window.options)
+    quill.on('text-change', function (delta, oldDelta, source) {
+      const html = document.querySelector('#editor').children[0].innerHTML
+      const message = {
+        type: 'onChange',
+        message: html,
+      }
+      // 触发 onMessage 事件
+      window.ReactNativeWebView.postMessage(JSON.stringify(message))
+    });
+    window.onload = function () {
+      window.addEventListener("message", function (e) {
+        
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+          type: 'receiveMessage',
+          message: 12
+        }))
+        // console.log('onMessage', data);
+        const data = JSON.parse(e.nativeEvent.data);
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+          type: 'receiveMessage',
+          message: (data)
+        }))
+        if (data.type === 'changeVal') {
+          document.querySelector('#editor').children[0].innerHTML = data.message;
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
