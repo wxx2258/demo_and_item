@@ -9,15 +9,16 @@
 
 @class  GTListItem;
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef void(^GTListLoaderFinishBlock)(BOOL success, NSArray<GTListItem *> *dataArray);
 
-NS_ASSUME_NONNULL_BEGIN
 /**
  列表请求
  */
 @interface GTListLoader : NSObject
 
-- (void)loadListData;
+- (void)loadListDataWithFinishBlock:(GTListLoaderFinishBlock)finishBlock;
 @end
 
 NS_ASSUME_NONNULL_END

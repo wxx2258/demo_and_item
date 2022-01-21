@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GTListItem : NSObject
+@interface GTListItem : NSObject <NSSecureCoding>
 
 @property(nonatomic,copy,readwrite) NSString *category;
 @property(nonatomic,copy,readwrite) NSString *picUrl;

@@ -11,12 +11,21 @@
 @interface GTDetailViewController ()<WKNavigationDelegate>
 @property(nonatomic, strong, readwrite) WKWebView *webView;
 @property(nonatomic, strong, readwrite) UIProgressView *progressView;
+@property(nonatomic, strong, readwrite) NSString *articleUrl;
 @end
 
 @implementation GTDetailViewController
 
 - (void)dealloc {
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+}
+
+-(instancetype)initWithUrlString:(NSString *)urlString{
+    self = [super init];
+    if (self) {
+        self.articleUrl = urlString;
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
@@ -28,7 +37,7 @@
         self.webView.navigationDelegate = self;
         self.webView;
     })];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://time.geekbang.org"]]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.articleUrl]]];
     
     [self.view addSubview:({
         self.progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 88, self.view.frame.size.width, 20)];
@@ -37,7 +46,7 @@
     
     // OVK 观察者模式，监听加载进度
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
-
+    
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction preferences:(WKWebpagePreferences *)preferences decisionHandler:(void (^)(WKNavigationActionPolicy, WKWebpagePreferences *))decisionHandler WK_SWIFT_ASYNC(4) API_AVAILABLE(macos(10.15), ios(13.0)){
@@ -55,13 +64,13 @@
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
