@@ -6,6 +6,8 @@
 //
 
 #import "GTVideoContoller.h"
+#import "GTVideoCoverView.h"
+#import "GTVideoToolBar.h"
 
 @interface GTVideoContoller ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -32,15 +34,17 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumLineSpacing = 10;
     flowLayout.minimumInteritemSpacing = 10;
-    flowLayout.itemSize = CGSizeMake((self.view.frame.size.width - 10) / 2, 300);
+//    flowLayout.itemSize = CGSizeMake((self.view.frame.size.width - 10) / 2, 300);
+    flowLayout.itemSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.width / 16 * 9 + GTVideoToolbarHeight); 
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
+//    collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     
     collectionView.delegate = self;
     collectionView.dataSource = self;
     
     // UICollectionView need register
-    [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
+    [collectionView registerClass:[GTVideoCoverView class] forCellWithReuseIdentifier:@"GTVideoCoverView"];
     
     // add collectionView in UIWindow
     [self.view addSubview:collectionView];
@@ -53,21 +57,16 @@
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GTVideoCoverView" forIndexPath:indexPath];
     
-    cell.backgroundColor = [UIColor redColor];
+    if ([cell isKindOfClass:[GTVideoCoverView class]]) {
+        [(GTVideoCoverView *)cell layoutWithVideoCoverUrl:@"icon.bundle/firstScreen.png" videoUrl:@"http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"];
+    }
     
     return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.item %3 == 0) {
-        return CGSizeMake(self.view.frame.size.width, 100);
-    } else {
-        return CGSizeMake((self.view.frame.size.width - 10) / 2, 300);
-    }
-}
-
+//-
 
 /*
 #pragma mark - Navigation

@@ -7,10 +7,10 @@
 
 #import "GTNewsViewController.h"
 #import "GTNormalTableViewCell.h"
-#import "GTDetailViewController.h"
 #import "GTDeleteCellView.h"
 #import "GTListLoader.h"
 #import "GTListItem.h"
+#import "GTMediator.h"
 
 @interface GTNewsViewController ()<UITableViewDataSource, UITableViewDelegate, GTNormalTableViewCellDelegate>
 
@@ -99,9 +99,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GTListItem *item = [self.dataArray objectAtIndex:indexPath.row];
-    GTDetailViewController *controller = [[GTDetailViewController alloc] initWithUrlString:item.articleUrl];
-    controller.title = [NSString stringWithFormat:@"%@", @(indexPath.row)];
-    [self.navigationController pushViewController:controller animated:YES];
+    //    GTDetailViewController *controller = [[GTDetailViewController alloc] initWithUrlString:item.articleUrl];
+    
+    // target - action
+    //    __kindof UIViewController *detailController = [GTMediator detailViewControllerWithUrl:item.articleUrl];
+    //    detailController.title = [NSString stringWithFormat:@"%@", @(indexPath.row)];
+    //    [self.navigationController pushViewController:detailController animated:YES];
+    
+    // urlSchema
+    [GTMediator openUrl:@"detail://" params:@{@"url": item.articleUrl, @"controller":self.navigationController}];
+    
+    // Protocol
+//    Class cls = [GTMediator classForProtocol:@protocol(GTDetailViewControllerProtocol)];
+//    [self.navigationController pushViewController:[[cls alloc] detailViewControllerWithUrl:item.articleUrl] animated:YES];
+    
     
     // 存储已点击过的数据
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:item.uniqueKey];
@@ -113,20 +124,20 @@
 
 // 实现一个GTNormalTableViewCellDelegate delegate的一个方法，可以在 GTNormalTableViewCell 调用该方法。
 - (void)tableViewCell:(UITableViewCell *)tableViewCell clickDeleteButton:(UIButton *)deleteButton {
-//    // 显示弹窗
-//    GTDeleteCellView *deleteView = [[GTDeleteCellView alloc] initWithFrame:self.view.bounds];
-//    
-//    // 转换deleteButton的坐标系到window对应的坐标系
-//    CGRect rect = [tableViewCell convertRect:deleteButton.frame toView:nil];
-//    
-//    // 处理block循环引用的问题
-//    __weak typeof(self) wself = self;
-//    // 传递一个函数下去，底下的 Controller 自行决定如何处理
-//    [deleteView showDeleteViewFromPoint:rect.origin clickBlock:^{
-//        __strong typeof(self)strongSelf = wself;
-//        [strongSelf.dataArray removeLastObject];
-//        [self.tableView deleteRowsAtIndexPaths:@[[strongSelf.tableView indexPathForCell:tableViewCell]] withRowAnimation:UITableViewRowAnimationAutomatic];
-//    }];
+    //    // 显示弹窗
+    //    GTDeleteCellView *deleteView = [[GTDeleteCellView alloc] initWithFrame:self.view.bounds];
+    //
+    //    // 转换deleteButton的坐标系到window对应的坐标系
+    //    CGRect rect = [tableViewCell convertRect:deleteButton.frame toView:nil];
+    //
+    //    // 处理block循环引用的问题
+    //    __weak typeof(self) wself = self;
+    //    // 传递一个函数下去，底下的 Controller 自行决定如何处理
+    //    [deleteView showDeleteViewFromPoint:rect.origin clickBlock:^{
+    //        __strong typeof(self)strongSelf = wself;
+    //        [strongSelf.dataArray removeLastObject];
+    //        [self.tableView deleteRowsAtIndexPaths:@[[strongSelf.tableView indexPathForCell:tableViewCell]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    //    }];
 }
 
 

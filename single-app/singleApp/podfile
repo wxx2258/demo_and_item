@@ -1,3 +1,6 @@
 target 'singleApp' do 
 	pod 'AFNetworking'
+	pod 'SDWebImage'
+	pod 'CocoaLumberjack'
+	pod 'IGListKit'
 end

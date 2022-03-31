@@ -14,17 +14,37 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - CocoaLumberjack (3.7.4):
+    - CocoaLumberjack/Core (= 3.7.4)
+  - CocoaLumberjack/Core (3.7.4)
+  - IGListDiffKit (4.0.0)
+  - IGListKit (4.0.0):
+    - IGListDiffKit (= 4.0.0)
+  - SDWebImage (5.12.3):
+    - SDWebImage/Core (= 5.12.3)
+  - SDWebImage/Core (5.12.3)
 
 DEPENDENCIES:
   - AFNetworking
+  - CocoaLumberjack
+  - IGListKit
+  - SDWebImage
 
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - CocoaLumberjack
+    - IGListDiffKit
+    - IGListKit
+    - SDWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
+  IGListDiffKit: 665d6cf43ce726e676013db9c7d6c4294259b6b2
+  IGListKit: fd5a5d21935298f5849fa49d426843cff97b77c7
+  SDWebImage: 53179a2dba77246efa8a9b85f5c5b21f8f43e38f
 
-PODFILE CHECKSUM: 3ed21896839f7deb99c673ab5c8cc4f5c8ccb348
+PODFILE CHECKSUM: 25e2826a72450698e665e47d6681e5fec60ba44d
 
 COCOAPODS: 1.11.2

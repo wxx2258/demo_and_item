@@ -9,6 +9,9 @@
 #import "GTNewsViewController.h"
 #import "GTVideoContoller.h"
 #import "GTRecommendViewController.h"
+#import "GTSplashView.h"
+#import "GTStatic.h"
+#import <GTFramework/GTFramework.h>
 
 @interface SceneDelegate ()<UITabBarControllerDelegate>
 
@@ -24,7 +27,7 @@
     UIWindowScene *windowScene = (UIWindowScene *)scene;
     self.window = [[UIWindow alloc] initWithWindowScene:windowScene];
     self.window.frame = windowScene.coordinateSpace.bounds;
-    
+        
     UITabBarController *tabbarController = [[UITabBarController alloc] init];
     
     UIViewController *newsViewController = [[GTNewsViewController alloc] init];
@@ -58,6 +61,12 @@
 
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
+    
+    [self.window addSubview:({
+        GTSplashView *splashView = [[GTSplashView alloc] initWithFrame:self.window.bounds];
+        splashView;
+    })];
+
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
@@ -97,6 +106,13 @@
     // Use this method to save data, release shared resources, and store enough scene-specific state information
     // to restore the scene back to its current state.
 }
+
+
+- (void)scene:(UIScene *)scene openURLContexts:(NSSet<UIOpenURLContext *> *)URLContexts{
+
+    NSLog(@"url");
+}
+
 
 
 @end

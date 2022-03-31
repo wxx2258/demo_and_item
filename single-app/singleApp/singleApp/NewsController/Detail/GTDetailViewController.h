@@ -6,6 +6,7 @@
 //
 
 #import "GTNewsViewController.h"
+#import "GTMediator.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
