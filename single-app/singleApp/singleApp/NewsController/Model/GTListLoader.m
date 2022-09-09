@@ -26,6 +26,7 @@
     NSArray<GTListItem *> *listData = [self _readDataFromLocal];
     if (listData) {
         finishBlock(YES, listData);
+        return;
     }
     
     
